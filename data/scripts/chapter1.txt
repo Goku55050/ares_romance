@@ -1,0 +1,38 @@
+// Chapter 1 - Prologue / Introduction
+// Format: Each line is a dialogue entry
+// This would be parsed from a binary format in production
+// For now, we'll embed in code
+
+// Placeholder script data - in production load from data/scripts/chapter1.bin
+const char* g_chapter1_script[] = {
+    // Line 0: Intro narration
+    "NARRATOR: The Arcane Academy. Where magic and steel shape destiny.",
+    // Line 1
+    "NARRATOR: You are Ares. A second-year student with... unusual heritage.",
+    // Line 2
+    "NARRATOR: Three women cross your path. Each hides secrets. Each wants something from you.",
+    // Line 3: Choice - first impression
+    "CHOICE: How do you present yourself?|Confident|Reserved|Playful|Mysterious",
+    // Line 4: Kira introduction
+    "KIRA: \"You're in my way. Move.\"",
+    "KIRA: \"...Hmph. New face. Don't think I'll go easy on you.\"",
+    // Line 6: Luna introduction
+    "LUNA: \"Interesting. Your mana signature is... irregular.\"",
+    "LUNA: \"I'm Luna. I study anomalies. You qualify.\"",
+    // Line 8: Rosa introduction
+    "ROSA: \"Oh! Um... h-hello. Are you lost?\"",
+    "ROSA: \"I'm Rosa. I tend the medicinal gardens. It's... nice to meet you.\"",
+    // Line 10: Choice - who to approach
+    "CHOICE: Who do you seek out first?|Kira - The fiery warrior|Luna - The enigmatic mage|Rosa - The gentle healer",
+    // Branching continues based on choice...
+    NULL
+};
+
+// Script loader would parse this format:
+// SPEAKER: text
+// CHOICE: prompt|opt1|opt2|opt3|opt4
+// SCENE: scene_id
+// AFFECTION: heroine_id, amount
+// FLAG: set/clear flag_id
+// JUMP: line_number
+// END: chapter

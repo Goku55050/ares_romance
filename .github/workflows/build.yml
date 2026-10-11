@@ -1,0 +1,38 @@
+name: Build GBA ROM
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install devkitARM and tonc
+        run: |
+          wget -q https://github.com/devkitPro/pacman/releases/download/devkitpro-pacman-1.0.1/devkitpro-pacman-1.0.1-linux-x86_64.pkg.tar.zst
+          sudo tar -C / -xf devkitpro-pacman-*.tar.zst
+          source /etc/profile.d/devkit-env.sh
+          dkp-pacman -Sy --noconfirm devkitARM tonc
+
+      - name: Build GBA ROM
+        run: |
+          source /etc/profile.d/devkit-env.sh
+          make
+
+      - name: Verify ROM exists
+        run: |
+          ls -la build/ares_romance.gba
+          file build/ares_romance.gba
+
+      - name: Upload ROM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ares_romance.gba
+          path: build/ares_romance.gba
+          retention-days: 30
